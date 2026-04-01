@@ -266,7 +266,6 @@ body {
 .preview-area {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 1;
   background: var(--bg);
   border: 1.5px dashed var(--border);
   border-radius: var(--radius-sm);
@@ -275,6 +274,7 @@ body {
   align-items: center;
   justify-content: center;
   transition: border-color 0.15s;
+  min-height: 120px;
 }
 
 .banner-card.dragging .preview-area {

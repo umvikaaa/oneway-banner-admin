@@ -4,7 +4,6 @@ const UPLOAD_PRESET = "oneway_banners";
 export const BANNER_SLOTS = [
   { id: "banner_slot_1", label: "배너 1" },
   { id: "banner_slot_2", label: "배너 2" },
-  { id: "banner_slot_3", label: "배너 3" },
 ];
 
 // 스마트스토어 HTML에 심을 고정 URL
