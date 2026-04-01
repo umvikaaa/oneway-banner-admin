@@ -89,8 +89,10 @@ function BannerCard({ slot }) {
     setErrorMsg("");
     try {
       await uploadBanner(slot.id, file);
-      setTimeout(() => setPreviewUrl(getBannerUrlFresh(slot.id)), 1000);      setImgError(false);
-      setStatus("success");
+setTimeout(() => {
+  setImgError(false);
+  setPreviewUrl(getBannerUrlFresh(slot.id));
+}, 1000);      setStatus("success");
       setTimeout(() => setStatus("idle"), 2500);
     } catch (err) {
       setErrorMsg(err.message);
