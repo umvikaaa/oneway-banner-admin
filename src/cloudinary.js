@@ -25,7 +25,6 @@ export async function uploadBanner(slotId, file) {
   formData.append("file", file);
   formData.append("upload_preset", UPLOAD_PRESET);
   formData.append("public_id", `banners/${slotId}`);
-  formData.append("invalidate", "true");
 
   // GIF는 resource_type을 image로 유지 (Cloudinary가 자동 처리)
   const resourceType = "image";
