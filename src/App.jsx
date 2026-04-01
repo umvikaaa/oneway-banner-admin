@@ -198,7 +198,7 @@ export default function App() {
     <div className="admin-wrap">
       <header className="admin-header">
         <div className="header-logo">
-          <span className="logo-text">oneway</span>
+  <img src="/logo.png" alt="Oneway" className="header-logo-img" />
           <span className="logo-sub">banner admin</span>
         </div>
         <div className="header-right">
