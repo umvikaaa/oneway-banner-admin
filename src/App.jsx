@@ -94,7 +94,7 @@ setStatus("uploading");
         setPreviewUrl(getBannerUrlFresh(slot.id));
         setStatus("success");
         setTimeout(() => setStatus("idle"), 2500);
-      }, 1500);
+      }, 3000);
     } catch (err) {
       setErrorMsg(err.message);
       setStatus("error");
