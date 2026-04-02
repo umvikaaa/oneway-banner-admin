@@ -85,17 +85,22 @@ function BannerCard({ slot }) {
     };
     tempImg.src = objectUrl;
 
-    setStatus("uploading");
+setStatus("uploading");
     setErrorMsg("");
     try {
       await uploadBanner(slot.id, file);
-setTimeout(() => {
-  setImgError(false);
-  setPreviewUrl(getBannerUrlFresh(slot.id));
-  setStatus("success");
-  setTimeout(() => setStatus("idle"), 2500);
-}, 1500);
-
+      setTimeout(() => {
+        setImgError(false);
+        setPreviewUrl(getBannerUrlFresh(slot.id));
+        setStatus("success");
+        setTimeout(() => setStatus("idle"), 2500);
+      }, 1500);
+    } catch (err) {
+      setErrorMsg(err.message);
+      setStatus("error");
+    }
+  };
+  
   const handleInputChange = (e) => handleFile(e.target.files[0]);
   const handleDrop = (e) => { e.preventDefault(); setDragging(false); handleFile(e.dataTransfer.files[0]); };
 
