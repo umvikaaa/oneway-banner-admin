@@ -6,14 +6,12 @@ export const BANNER_SLOTS = [
   { id: "banner_slot_2", label: "배너 2" },
 ];
 
-// 스마트스토어 HTML에 심을 고정 URL
 export function getBannerUrl(slotId) {
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/${slotId}`;
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/${slotId}.jpg`;
 }
 
-// 업로드 직후 미리보기용 (캐시 무력화)
 export function getBannerUrlFresh(slotId) {
-  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/${slotId}?t=${Date.now()}`;
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/${slotId}.jpg?t=${Date.now()}`;
 }
 
 export async function uploadBanner(slotId, file) {
@@ -21,7 +19,6 @@ export async function uploadBanner(slotId, file) {
   formData.append("file", file);
   formData.append("upload_preset", UPLOAD_PRESET);
   formData.append("public_id", slotId);
-  formData.append("format", "jpg");
 
   const res = await fetch(
     `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
