@@ -209,7 +209,7 @@ export default function App() {
       <main className="admin-main">
         <div className="page-title">
           <h1>배너 관리</h1>
-          <p>이미지를 교체하면 스마트스토어 상세페이지에 즉시 반영돼요.</p>
+          <p>이미지를 교체하면 스마트스토어 html이 심어진 모든 상품 상세페이지에 즉시 반영돼요.</p>
         </div>
         <div className="banner-grid">
           {BANNER_SLOTS.map((slot) => (
