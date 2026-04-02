@@ -92,13 +92,9 @@ function BannerCard({ slot }) {
 setTimeout(() => {
   setImgError(false);
   setPreviewUrl(getBannerUrlFresh(slot.id));
-}, 1000);      setStatus("success");
-      setTimeout(() => setStatus("idle"), 2500);
-    } catch (err) {
-      setErrorMsg(err.message);
-      setStatus("error");
-    }
-  };
+  setStatus("success");
+  setTimeout(() => setStatus("idle"), 2500);
+}, 1500);
 
   const handleInputChange = (e) => handleFile(e.target.files[0]);
   const handleDrop = (e) => { e.preventDefault(); setDragging(false); handleFile(e.dataTransfer.files[0]); };
