@@ -39,6 +39,7 @@ export async function uploadBanner(slotId, file) {
   return await res.json();
 }
 
+
 export async function deleteBanner(slotId) {
   const svgBlob = new Blob(
     [`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400"><rect width="1200" height="400" fill="#f5f5f5"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="32" fill="#ccc">배너 없음</text></svg>`],
