@@ -19,9 +19,36 @@ export function getBannerUrlFresh(slotId) {
   return `${getBannerUrl(slotId)}&t=${Date.now()}`;
 }
 
+const MAX_WIDTH = 1200;
+const QUALITY = 0.85;
+
+function compressImage(file) {
+  // SVG·GIF는 Canvas 변환 불가 — 원본 그대로
+  if (file.type === "image/svg+xml" || file.type === "image/gif") {
+    return Promise.resolve(file);
+  }
+  return new Promise((resolve) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const scale = Math.min(1, MAX_WIDTH / img.naturalWidth);
+      const w = Math.round(img.naturalWidth * scale);
+      const h = Math.round(img.naturalHeight * scale);
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      canvas.toBlob((blob) => resolve(new File([blob], file.name, { type: "image/webp" })), "image/webp", QUALITY);
+    };
+    img.src = url;
+  });
+}
+
 export async function uploadBanner(slotId, file) {
+  const compressed = await compressImage(file);
   const storageRef = ref(storage, `banners/${slotId}`);
-  await uploadBytes(storageRef, file, { contentType: file.type });
+  await uploadBytes(storageRef, compressed, { contentType: compressed.type });
   return { url: getBannerUrl(slotId) };
 }
 
