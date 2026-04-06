@@ -52,6 +52,7 @@ function LoginScreen() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="이메일 입력"
+                            autoComplete="email"
                             required
                         />
                     </div>
@@ -62,6 +63,7 @@ function LoginScreen() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="비밀번호 입력"
+                            autoComplete="current-password"
                             required
                         />
                     </div>
@@ -87,6 +89,7 @@ function BannerCard({ slot }) {
     const [imgKey, setImgKey] = useState(0);
     const [dragging, setDragging] = useState(false);
     const [imgSize, setImgSize] = useState(null);
+    const [imgLoading, setImgLoading] = useState(true);
 
     const handleFile = async (file) => {
         if (!file) return;
@@ -114,6 +117,7 @@ function BannerCard({ slot }) {
         setErrorMsg("");
         try {
             await uploadBanner(slot.id, file);
+            setImgLoading(true);
             setImgKey((k) => k + 1);
             setImgError(false);
             setPreviewUrl(getBannerUrlFresh(slot.id));
@@ -138,6 +142,7 @@ function BannerCard({ slot }) {
         setImgSize(null);
         try {
             await deleteBanner(slot.id);
+            setImgLoading(true);
             setImgKey((k) => k + 1);
             setPreviewUrl(getBannerUrlFresh(slot.id));
             setImgError(false);
@@ -178,11 +183,14 @@ function BannerCard({ slot }) {
                     src={previewUrl}
                     alt={slot.label}
                     className="preview-img"
-                    onLoad={() => setImgError(false)}
-                    onError={() => setImgError(true)}
-                    style={{ display: imgError ? "none" : "block" }}
+                    onLoad={() => { setImgError(false); setImgLoading(false); }}
+                    onError={() => { setImgError(true); setImgLoading(false); }}
+                    style={{ display: imgError || imgLoading ? "none" : "block" }}
                 />
-                {imgError && (
+                {imgLoading && !isLoading && (
+                    <div className="preview-skeleton" />
+                )}
+                {!imgLoading && imgError && (
                     <div className="preview-empty">
                         <span className="empty-icon">+</span>
                         <span className="empty-text">이미지 없음</span>

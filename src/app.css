@@ -315,6 +315,24 @@ body {
   color: var(--text-muted);
 }
 
+.preview-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--border) 25%,
+    #e0ddd8 50%,
+    var(--border) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 .preview-overlay {
   position: absolute;
   inset: 0;
