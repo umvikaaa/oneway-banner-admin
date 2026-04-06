@@ -48,7 +48,10 @@ function compressImage(file) {
 export async function uploadBanner(slotId, file) {
   const compressed = await compressImage(file);
   const storageRef = ref(storage, `banners/${slotId}`);
-  await uploadBytes(storageRef, compressed, { contentType: compressed.type });
+  await uploadBytes(storageRef, compressed, {
+    contentType: compressed.type,
+    cacheControl: "public, max-age=31536000",
+  });
   return { url: getBannerUrl(slotId) };
 }
 
