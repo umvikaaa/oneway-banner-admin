@@ -11,7 +11,7 @@ import {
     getBannerUrl,
     uploadBanner,
     deleteBanner,
-} from "./cloudinary";
+} from "./storage";
 import "./app.css";
 
 function LoginScreen() {
