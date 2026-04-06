@@ -50,7 +50,7 @@ export async function uploadBanner(slotId, file) {
   const storageRef = ref(storage, `banners/${slotId}`);
   await uploadBytes(storageRef, compressed, {
     contentType: compressed.type,
-    cacheControl: "public, max-age=31536000",
+    cacheControl: "no-cache",
   });
   return { url: getBannerUrl(slotId) };
 }
